@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "sensor-noise-sim"
+version = "0.1.0"
+description = "Bibliothèque de simulation de bruits et erreurs pour IMU, baromètre et odométrie."
+authors = ["Vous <vous@example.com>"]
+readme = "README.md"
+license = "MIT"
+packages = [{ include = "sensor_noise_sim" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = ">=1.24,<3"
+PyYAML = ">=6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

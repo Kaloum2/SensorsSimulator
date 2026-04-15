@@ -1,0 +1,3 @@
+# Généré pour compatibilité pip ; préférez Poetry (voir README).
+numpy>=1.24,<3
+PyYAML>=6.0

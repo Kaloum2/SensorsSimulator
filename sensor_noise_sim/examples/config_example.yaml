@@ -1,0 +1,54 @@
+# Exemple de configuration pour sensor_noise_sim (IMU, baromètre, odométrie, artefacts).
+# Charger avec : build_sensor_pipeline_from_dict(load_config("examples/config_example.yaml"))
+
+seed: 42
+
+odometry_dim_linear: 2
+
+imu:
+  gyro_white_noise_std: 0.002
+  accel_white_noise_std: 0.05
+  gyro_bias_instability_std: 0.00001
+  accel_bias_instability_std: 0.0001
+  gyro_scale_ppm: 500
+  accel_scale_ppm: 300
+  gyro_misalignment_rad: [0.001, -0.0005, 0.0002]
+  accel_misalignment_rad: [0.0, 0.0, 0.0]
+  use_allan_style_bias: true
+
+barometer:
+  pressure_white_noise_std_pa: 8.0
+  pressure_bias_instability_std_pa: 0.5
+  pressure_bias_initial_pa: 0.0
+  temperature_white_noise_std_c: 0.1
+
+odometry:
+  velocity_white_noise_std: 0.02
+  angular_velocity_white_noise_std: 0.01
+  velocity_bias_instability_std: 0.001
+  scale_error_ppm: 200
+  slip_probability: 0.02
+  slip_factor_range: [0.75, 0.95]
+  encoder_quantization_m: 0.0
+
+artifacts:
+  accel:
+    shock:
+      probability_per_step: 0.002
+      amplitude_std_m_s2: 6.0
+      axis_weights: [1.0, 1.0, 0.3]
+    vibration:
+      frequencies_hz: [45.0, 120.0]
+      amplitudes_m_s2: [0.15, 0.05]
+      axis: [0.0, 0.0, 1.0]
+      phase_noise_rad: 0.05
+    spike:
+      probability_per_step: 0.001
+      amplitude_std: 3.0
+    dropout:
+      probability_per_step: 0.0
+      mode: "nan"   # guillemets : évite que YAML interprète nan comme flottant
+  gyro:
+    spike:
+      probability_per_step: 0.0005
+      amplitude_std: 0.01
